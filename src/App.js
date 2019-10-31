@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// mobx-router
+import { RouterStore, MobxRouter, startRouter } from 'mobx-router';
+import views from './router';
+// mobx
+import { Provider } from 'mobx-react';
+import RootStore from './stores';
+let store = new RootStore();
+startRouter(views, store);
+console.log('store', store);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Provider store={store}>
+            <div className="App">
+                <h1>App</h1>
+                <MobxRouter />
+            </div>
+        </Provider>
+    );
 }
 
 export default App;
