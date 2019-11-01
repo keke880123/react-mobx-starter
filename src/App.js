@@ -13,7 +13,7 @@ function App() {
     return (
         <Provider store={store}>
             <div className="App">
-                <h1>App</h1>
+                {/* <h1>App</h1> */}
                 <MobxRouter />
             </div>
         </Provider>

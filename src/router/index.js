@@ -13,12 +13,13 @@ const views = {
     }),
     listPage: new Route({
         path: '/list',
-        component: <MainLayout />,
-        onEnter: (route, params, store) => {
-            // 바람직한 방법이 아님
-            // store.router.params = { ...store.router.params, page: 'list' };
-            store.routeStore.setPage('list');
-        }
+        component: <MainLayout page={'list'} />,
+        onEnter: (route, params, store) => {}
+    }),
+    detailPage: new Route({
+        path: '/list/:num',
+        component: <MainLayout page={'detail'} />,
+        onEnter: (route, params, store) => {}
     })
 };
 
