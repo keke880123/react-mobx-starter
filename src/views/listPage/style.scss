@@ -2,8 +2,22 @@
 .container-ListPage {
   height: 90vh;
   overflow: scroll;
-  .container-ListComponent {
+  .img-box {
     height: 10%;
-    border-bottom: 1px solid rgba(220,223,230,1);
+    .container-ListComponent {
+      height: 100%;
+      border-bottom: 1px solid rgba(220,223,230,1);
+      display: flex;
+      cursor: pointer;
+      img {
+        width: 30%;
+      }
+      .content-box {
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
   }
 }

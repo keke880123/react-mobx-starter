@@ -9,11 +9,12 @@ class StyleStore {
     width = 0;
     height = 0;
 
-    setSize = async (width, height) => {
+    setSize = (width, height) => {
         this.width = width;
         this.height = height;
         console.log('size', this.width, this.height);
     };
+
 }
 
 decorate(StyleStore, {
