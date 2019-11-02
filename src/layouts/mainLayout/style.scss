@@ -1,8 +1,11 @@
-.container-HeaderComponent {
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    // border: 1px solid tomato;
-    background-color: rgba(64, 158, 255, 1);
+.container-MainLayout {
+    overflow: hidden;
+    .container-HeaderComponent {
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // border: 1px solid tomato;
+        background-color: rgba(64, 158, 255, 1);
+    }
 }

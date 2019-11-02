@@ -10,7 +10,7 @@ class MainLayout extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className={'container-MainLayout'}>
                 <Header title={this.props.page}></Header>
                 {(() => {
                     switch (this.props.page) {
