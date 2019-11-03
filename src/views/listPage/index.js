@@ -3,7 +3,7 @@ import { toJs } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import ListComponent from './components/listComponent';
 import './style.scss';
-import { reaction } from 'mobx';
+import { reaction, decorate, computed } from 'mobx';
 
 class ListPage extends React.Component {
     constructor(props) {
@@ -11,7 +11,6 @@ class ListPage extends React.Component {
         this.updateSize = this.updateSize.bind(this);
         this.updateSize();
         this.props.store.sampleDataStore.setList();
-        // this.state = { list: []};
     }
     componentDidMount() {
         console.log('component mount');
@@ -24,26 +23,32 @@ class ListPage extends React.Component {
     updateSize() {
         this.props.store.styleStore.setSize(window.innerWidth, window.innerHeight);
     }
+    get getMyList() {
+        console.log('computed');
+        return this.props.store.sampleDataStore.list.map((value) => {
+            let strArray = value.download_url.split('/');
+            strArray[strArray.length-2] = Math.floor(this.props.store.styleStore.width/3);
+            strArray[strArray.length-1] = Math.floor(this.props.store.styleStore.height/10);
+            const newValue = {...value, download_url: strArray.join('/')}
+            return newValue;
+        });
+    }
 
     render() {
-        const {list} = this.props.store.sampleDataStore;
-        const {width, height} = this.props.store.styleStore;
         return (
             <div className={'container-ListPage'}>
                 <div className={'img-box'}>
-                    {list.map((value, index) => {
-                        let strArray = value.download_url.split('/');
-                        strArray[strArray.length-2] = Math.floor(parseInt(width)/3);
-                        strArray[strArray.length-1] = Math.floor(parseInt(height)/10);
-                        // value.download_url = strArray.join('/');
-                        const newValue = {...value, download_url: strArray.join('/')}
-                        // return <ListComponent item={value} key={index} />;
-                        return <ListComponent item={newValue} key={index} />;
+                    {this.getMyList.map((value, index) => {
+                        return <ListComponent item={value} key={index} />;
                     })}
                 </div>
             </div>
         );
     }
 }
+
+decorate(ListPage, {
+    getMyList: computed
+})
 
 export default inject('store')(observer(ListPage));
