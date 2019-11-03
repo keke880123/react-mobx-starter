@@ -11,45 +11,34 @@ class ListPage extends React.Component {
         this.updateSize = this.updateSize.bind(this);
         this.updateSize();
         this.props.store.sampleDataStore.setList();
-        this.state = { list: []};
+        // this.state = { list: []};
     }
     componentDidMount() {
         console.log('component mount');
         window.addEventListener('resize', this.updateSize);
-        this.autoUpdateList = reaction(() => {
-            return {
-                width: this.props.store.styleStore.width,
-                height: this.props.store.styleStore.height,
-                list: this.props.store.sampleDataStore.list
-            }
-        }, (data, reaction) => {
-            const list = data.list.map((value, index) => {
-                let strArray = value.download_url.split('/');
-                strArray[strArray.length-2] = Math.floor(parseInt(data.width)/3);
-                strArray[strArray.length-1] = Math.floor(parseInt(data.height)/10);
-                value.download_url = strArray.join('/');
-                return value;
-            });
-            this.setState({
-                list: list
-            })
-        })
     }
     componentWillUnmount() {
         console.log('component unmount');
         window.removeEventListener('resize', this.updateSize);
-        this.autoUpdateList();
     }
     updateSize() {
         this.props.store.styleStore.setSize(window.innerWidth, window.innerHeight);
     }
 
     render() {
+        const {list} = this.props.store.sampleDataStore;
+        const {width, height} = this.props.store.styleStore;
         return (
             <div className={'container-ListPage'}>
                 <div className={'img-box'}>
-                    {this.state.list.map((value, index) => {
-                        return <ListComponent item={value} key={index} />;
+                    {list.map((value, index) => {
+                        let strArray = value.download_url.split('/');
+                        strArray[strArray.length-2] = Math.floor(parseInt(width)/3);
+                        strArray[strArray.length-1] = Math.floor(parseInt(height)/10);
+                        // value.download_url = strArray.join('/');
+                        const newValue = {...value, download_url: strArray.join('/')}
+                        // return <ListComponent item={value} key={index} />;
+                        return <ListComponent item={newValue} key={index} />;
                     })}
                 </div>
             </div>
