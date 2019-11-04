@@ -14,13 +14,23 @@ class SampleDataStore {
         this.list = data;
         // console.log('data', data);
     };
+    get getMyList() {
+        console.log('computed');
+        return this.list.map(value => {
+            let strArray = value.download_url.split('/');
+            strArray[strArray.length - 2] = Math.floor(this.store.styleStore.width / 3);
+            strArray[strArray.length - 1] = Math.floor(this.store.styleStore.height / 10);
+            const newValue = { ...value, download_url: strArray.join('/') };
+            return newValue;
+        });
+    }
 }
 
 decorate(SampleDataStore, {
     list: observable,
     setList: action,
     detail: observable,
-    setDetail: action
+    getMyList: computed
 });
 
 export default SampleDataStore;

@@ -23,22 +23,12 @@ class ListPage extends React.Component {
     updateSize() {
         this.props.store.styleStore.setSize(window.innerWidth, window.innerHeight);
     }
-    get getMyList() {
-        console.log('computed');
-        return this.props.store.sampleDataStore.list.map((value) => {
-            let strArray = value.download_url.split('/');
-            strArray[strArray.length-2] = Math.floor(this.props.store.styleStore.width/3);
-            strArray[strArray.length-1] = Math.floor(this.props.store.styleStore.height/10);
-            const newValue = {...value, download_url: strArray.join('/')}
-            return newValue;
-        });
-    }
 
     render() {
         return (
             <div className={'container-ListPage'}>
                 <div className={'img-box'}>
-                    {this.getMyList.map((value, index) => {
+                    {this.props.store.sampleDataStore.getMyList.map((value, index) => {
                         return <ListComponent item={value} key={index} />;
                     })}
                 </div>
@@ -49,6 +39,6 @@ class ListPage extends React.Component {
 
 decorate(ListPage, {
     getMyList: computed
-})
+});
 
 export default inject('store')(observer(ListPage));
