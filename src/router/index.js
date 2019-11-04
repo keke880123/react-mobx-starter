@@ -20,6 +20,11 @@ const views = {
         path: '/list/:num',
         component: <MainLayout page={'detail'} />,
         onEnter: (route, params, store) => {}
+    }),
+    todoListPage: new Route({
+        path: '/todoList',
+        component: <MainLayout page={'todoList'} />,
+        onEnter: (route, params, store) => {}
     })
 };
 
