@@ -2,7 +2,6 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import './style.scss';
 import { updateSize } from '../../utils/size';
-import { decorate, computed, reaction } from 'mobx';
 
 class DetailPage extends React.Component {
     constructor(props) {

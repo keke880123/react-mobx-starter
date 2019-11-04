@@ -7,12 +7,10 @@ class SampleDataStore {
     }
 
     list = [];
-    detail = '';
 
     setList = async () => {
         const data = await getList();
         this.list = data;
-        // console.log('data', data);
     };
     get getMyList() {
         console.log('computed');
@@ -29,7 +27,6 @@ class SampleDataStore {
 decorate(SampleDataStore, {
     list: observable,
     setList: action,
-    detail: observable,
     getMyList: computed
 });
 

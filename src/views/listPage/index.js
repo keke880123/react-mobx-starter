@@ -1,9 +1,7 @@
 import React from 'react';
-import { toJs } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import ListComponent from './components/listComponent';
 import './style.scss';
-import { reaction, decorate, computed } from 'mobx';
 
 class ListPage extends React.Component {
     constructor(props) {
@@ -36,9 +34,5 @@ class ListPage extends React.Component {
         );
     }
 }
-
-decorate(ListPage, {
-    getMyList: computed
-});
 
 export default inject('store')(observer(ListPage));
