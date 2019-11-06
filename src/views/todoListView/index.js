@@ -2,6 +2,7 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import './style.scss';
 import { enterKey } from '../../utils/keypress';
+import List from './components/list';
 
 class TodoListView extends React.Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class TodoListView extends React.Component {
     componentDidMount() {
         console.log('input', this.state.inputRef);
         this.state.inputRef.current.addEventListener('keypress', this.enterKey);
+        this.props.store.todoStore.getTodoList();
     }
     componentWillUnmount() {
         this.state.inputRef.current.removeEventListener('keypress', this.enterKey);
@@ -37,7 +39,11 @@ class TodoListView extends React.Component {
                         }}
                     />
                 </div>
-                {/* <button onClick={this.testBtn}>test</button> */}
+                <div className={'todo-box'}>
+                    {this.props.store.todoStore.todoList.map((value, index) => {
+                        return <List item={value} key={index} />;
+                    })}
+                </div>
             </div>
         );
     }
