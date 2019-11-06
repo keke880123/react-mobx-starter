@@ -7,7 +7,7 @@ import { Provider } from 'mobx-react';
 import RootStore from './stores';
 let store = new RootStore();
 startRouter(views, store);
-console.log('store', store);
+// console.log('store', store);
 
 function App() {
     return (

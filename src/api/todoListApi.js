@@ -1,8 +1,8 @@
 import service from '../utils/request';
 
-export function getList(params = {}) {
+export function addTodo(params) {
     return service({
-        url: 'https://picsum.photos/v2/list',
+        url: 'http://localhost:5000/todo/addTodo',
         method: 'get',
         params: params
     });
